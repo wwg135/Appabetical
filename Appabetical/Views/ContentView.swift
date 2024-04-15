@@ -49,7 +49,7 @@ struct ContentView: View {
                         }
                         Text("分开排序应用").tag(IconStateManager.FolderSortingOption.separately)
                     }
-                    Picker("Widgets", selection: $widgetOp) {
+                    Picker("小部件", selection: $widgetOp) {
                         Text("移到顶部").tag(IconStateManager.WidgetOptions.top)
                     }
                     Button("应用排序") {
