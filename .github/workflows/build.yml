@@ -1,4 +1,4 @@
-name: Build ipa
+name: build
 
 on:
   push:
