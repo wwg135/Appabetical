@@ -19,7 +19,7 @@ struct MultiSelectPickerView: View {
         Form {
             List {
                 let (numPages, hiddenPages) = pages
-                Section(header: Text("页面"), footer: hiddenPages.isEmpty ? Text("") : Text("所有隐藏的页面将被取消隐藏。")) {
+                Section(header: Text("Pages"), footer: hiddenPages.isEmpty ? Text("") : Text("所有隐藏的页面将被取消隐藏。")) {
                     ForEach(0...numPages - 1, id: \.self) { item in
                         Button(action: {
                             if self.selectedItems.contains(item) {
