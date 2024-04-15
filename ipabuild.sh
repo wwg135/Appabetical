@@ -8,11 +8,6 @@ WORKING_LOCATION="$(pwd)"
 APPLICATION_NAME=Appabetical
 CONFIGURATION=Debug
 
-cd build
-if [ -e "$APPLICATION_NAME.ipa" ]; then
-rm $APPLICATION_NAME.ipa
-fi
-
 # Build .app
 xcodebuild -project "$WORKING_LOCATION/$APPLICATION_NAME.xcodeproj" \
     -scheme $APPLICATION_NAME \
