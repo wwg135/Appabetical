@@ -37,7 +37,7 @@ fi
 # Package .ipa
 rm -rf Payload
 mkdir Payload
-cp -r $APPLICATION_NAME.app Payload/$APPLICATION_NAME.app
+cp -r $WORKING_LOCATION/build/$APPLICATION_NAME.app Payload/$APPLICATION_NAME.app
 zip -vr $APPLICATION_NAME.ipa Payload
 rm -rf $APPLICATION_NAME.app
 rm -rf Payload
