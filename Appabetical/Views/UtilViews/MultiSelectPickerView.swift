@@ -30,7 +30,7 @@ struct MultiSelectPickerView: View {
                             self.selectedItems.sort()
                         }) {
                             HStack {
-                                Text("页面 \(String(item + 1))\(hiddenPages.contains(item) ? " (hidden)" : "")")
+                                Text("Page \(String(item + 1))\(hiddenPages.contains(item) ? " (hidden)" : "")")
                                 Spacer()
                                 Image(systemName: "checkmark")
                                     .opacity(self.selectedItems.contains(item) ? 1.0 : 0.0)
@@ -41,7 +41,7 @@ struct MultiSelectPickerView: View {
                         .foregroundColor(.primary)
                     }
                 }
-                Section(header: Text("文件夹")) {
+                Section(header: Text("Folders")) {
                     Text("即将到来").foregroundColor(.secondary)
                 }
             }
