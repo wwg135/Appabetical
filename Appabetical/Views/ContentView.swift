@@ -28,7 +28,7 @@ struct ContentView: View {
                         MultiSelectPickerView(pages: IconStateManager.getPages(), selectedItems: $selectedItems, pageOp: $pageOp).navigationBarTitle("", displayMode: .inline)
                     }, label: {
                         HStack {
-                            Text("Select Pages")
+                            Text("选择页面")
                             Spacer()
                             Text(selectedItems.isEmpty ? "None" : selectedItems.map { String($0 + 1) }.joined(separator: ", ")).foregroundColor(.secondary)
                         }
@@ -36,34 +36,34 @@ struct ContentView: View {
                     Picker("Ordering", selection: $sortOp) {
                         Text("A-Z").tag(IconStateManager.SortOption.alphabetically)
                         Text("Z-A").tag(IconStateManager.SortOption.alphabeticallyReversed)
-                        Text("Color").tag(IconStateManager.SortOption.color)
+                        Text("颜色").tag(IconStateManager.SortOption.color)
                     }.onChange(of: sortOp, perform: {nv in if nv == .color && folderOp == .alongside { folderOp = .separately }})
                     Picker("Pages", selection: $pageOp) {
-                        Text("Sort pages independently").tag(IconStateManager.PageSortingOption.individually)
-                        Text("Sort apps across pages").tag(IconStateManager.PageSortingOption.acrossPages)
+                        Text("独立排序页面").tag(IconStateManager.PageSortingOption.individually)
+                        Text("跨页面排序应用程序").tag(IconStateManager.PageSortingOption.acrossPages)
                     }
                     Picker("Folders", selection: $folderOp) {
-                        Text("Retain current order").tag(IconStateManager.FolderSortingOption.noSort)
+                        Text("保留当前顺序").tag(IconStateManager.FolderSortingOption.noSort)
                         if (sortOp == .alphabetically || sortOp == .alphabeticallyReversed) {
-                            Text("Sort mixed with apps").tag(IconStateManager.FolderSortingOption.alongside)
+                            Text("混合排序应用").tag(IconStateManager.FolderSortingOption.alongside)
                         }
-                        Text("Sort separate from apps").tag(IconStateManager.FolderSortingOption.separately)
+                        Text("分开排序应用").tag(IconStateManager.FolderSortingOption.separately)
                     }
                     Picker("Widgets", selection: $widgetOp) {
-                        Text("Move to top").tag(IconStateManager.WidgetOptions.top)
+                        Text("移到顶部").tag(IconStateManager.WidgetOptions.top)
                     }
-                    Button("Sort Apps") {
+                    Button("应用排序") {
                         sortPage()
                     }.disabled(selectedItems.isEmpty)
                 }
-                Section(footer: Text((fm.fileExists(atPath: savedLayoutUrl.path) ?  "The previously saved layout will be overwritten." : "It is recommended you save your current layout before experimenting as only one undo is possible." ) + "\n\nVersion \(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "pirate version bozo®")")) {
-                    Button("Undo Last Sort") {
+                Section(footer: Text((fm.fileExists(atPath: savedLayoutUrl.path) ?  "之前保存的布局将被覆盖。" : "建议您在进行实验之前保存当前的布局，因为只能撤销一次操作。" ) + "\n\nVersion \(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "pirate version bozo®")")) {
+                    Button("撤销上次排序") {
                         restoreBackup()
                     }.disabled(!fm.fileExists(atPath: plistUrlBkp.path))
-                    Button("Restore Saved Layout") {
+                    Button("恢复保存布局") {
                         restoreLayout()
                     }.disabled(!fm.fileExists(atPath: savedLayoutUrl.path))
-                    Button("Back Up Current Layout") {
+                    Button("备份当前布局") {
                         saveLayout()
                     }
                 }
@@ -87,13 +87,19 @@ struct ContentView: View {
                             UIImpactFeedbackGenerator(style: .light).impactOccurred()
                             openURL(URL(string: "https://github.com/Avangelista/Appabetical")!)
                         } label: {
-                            Label("Source Code", systemImage: "shippingbox")
+                            Label("源代码", systemImage: "shippingbox")
                         }
                         Button {
                             UIImpactFeedbackGenerator(style: .light).impactOccurred()
                             openURL(URL(string: "https://github.com/Avangelista")!)
                         } label: {
                             Label("Avangelista", systemImage: "person")
+                        }
+                        Button {
+                            UIImpactFeedbackGenerator(style: .light).impactOccurred()
+                            openURL(URL(string: "https://github.com/wwg135")!)
+                        } label: {
+                            Label("wwg135", systemImage: "person")
                         }
                         Button {
                             UIImpactFeedbackGenerator(style: .light).impactOccurred()
@@ -152,7 +158,7 @@ struct ContentView: View {
     }
     
     func restoreBackup() {
-        UIApplication.shared.confirmAlert(title: "Confirm Undo", body: "This layout was saved on \(BackupManager.getTimeSaved(url: plistUrlBkp) ?? "(unknown date)"). Be mindful if you've added/removed any apps, widgets or folders since then as they may appear incorrectly. Would you like to continue?", onOK: {
+        UIApplication.shared.confirmAlert(title: "确认撤销", body: "布局保存在 \(BackupManager.getTimeSaved(url: plistUrlBkp) ?? "(unknown date)"). 当然，请注意如果您在那之后添加或删除了任何应用程序、小部件或文件夹，它们可能会显示不正确。您是否希望继续？", onOK: {
             do {
                 try BackupManager.restoreBackup()
                 respringFrontboard()
@@ -161,7 +167,7 @@ struct ContentView: View {
     }
     
     func restoreLayout() {
-        UIApplication.shared.confirmAlert(title: "Confirm Restore", body: "This layout was saved on \(BackupManager.getTimeSaved(url: savedLayoutUrl) ?? "(unknown date)"). Be mindful if you've added/removed any apps, widgets or folders since then as they may appear incorrectly. Would you like to continue?", onOK: {
+        UIApplication.shared.confirmAlert(title: "确认恢复", body: "布局 \(BackupManager.getTimeSaved(url: savedLayoutUrl) ?? "(unknown date)"). 当然，请注意如果您在那之后添加或删除了任何应用程序、小部件或文件夹，它们可能会显示不正确。您是否希望继续？", onOK: {
             do {
                 try BackupManager.restoreLayout()
                 respringFrontboard()
