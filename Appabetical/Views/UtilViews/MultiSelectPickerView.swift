@@ -19,7 +19,7 @@ struct MultiSelectPickerView: View {
         Form {
             List {
                 let (numPages, hiddenPages) = pages
-                Section(header: Text("Pages"), footer: hiddenPages.isEmpty ? Text("") : Text("All hidden pages will be unhidden.")) {
+                Section(header: Text("页面"), footer: hiddenPages.isEmpty ? Text("") : Text("所有隐藏的页面将被取消隐藏。")) {
                     ForEach(0...numPages - 1, id: \.self) { item in
                         Button(action: {
                             if self.selectedItems.contains(item) {
@@ -30,7 +30,7 @@ struct MultiSelectPickerView: View {
                             self.selectedItems.sort()
                         }) {
                             HStack {
-                                Text("Page \(String(item + 1))\(hiddenPages.contains(item) ? " (hidden)" : "")")
+                                Text("页面 \(String(item + 1))\(hiddenPages.contains(item) ? " (hidden)" : "")")
                                 Spacer()
                                 Image(systemName: "checkmark")
                                     .opacity(self.selectedItems.contains(item) ? 1.0 : 0.0)
@@ -41,8 +41,8 @@ struct MultiSelectPickerView: View {
                         .foregroundColor(.primary)
                     }
                 }
-                Section(header: Text("Folders")) {
-                    Text("Coming Soon").foregroundColor(.secondary)
+                Section(header: Text("文件夹")) {
+                    Text("即将到来").foregroundColor(.secondary)
                 }
             }
         }
