@@ -17,14 +17,14 @@ class BackupManager {
                 // Set modification date to now
                 let attributes: [FileAttributeKey : Any] = [.modificationDate: Date()]
                 try fm.setAttributes(attributes, ofItemAtPath: savedLayoutUrl.path)
-                UIApplication.shared.alert(title: "Layout Saved", body: "Layout has been saved successfully.")
+                UIApplication.shared.alert(title: "布局已保存", body: "布局已成功保存。")
             } catch {
                 UIApplication.shared.alert(body: error.localizedDescription)
             }
         }
         
         if fm.fileExists(atPath: savedLayoutUrl.path) {
-            UIApplication.shared.confirmAlert(title: "Confirm Save", body: "This will overwrite your previously saved layout. Would you like to continue?", onOK: {
+            UIApplication.shared.confirmAlert(title: "确认保存", body: "这将覆盖您先前保存的布局。您是否要继续？", onOK: {
                 copyAndAlert()
             }, noCancel: false)
         } else {
