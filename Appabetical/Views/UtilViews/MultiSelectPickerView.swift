@@ -30,7 +30,7 @@ struct MultiSelectPickerView: View {
                             self.selectedItems.sort()
                         }) {
                             HStack {
-                                Text("页面 \(String(item + 1))\(hiddenPages.contains(item) ? " (hidden)" : "")")
+                                Text("Page \(String(item + 1))\(hiddenPages.contains(item) ? " (hidden)" : "")")
                                 Spacer()
                                 Image(systemName: "checkmark")
                                     .opacity(self.selectedItems.contains(item) ? 1.0 : 0.0)
