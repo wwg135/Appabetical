@@ -19,7 +19,7 @@ struct MultiSelectPickerView: View {
         Form {
             List {
                 let (numPages, hiddenPages) = pages
-                Section(header: Text("Pages"), footer: hiddenPages.isEmpty ? Text("") : Text("所有隐藏的页面将被显示出来")) {
+                Section(header: Text("Pages"), footer: hiddenPages.isEmpty ? Text("") : Text("All hidden pages will be unhidden.")) {
                     ForEach(0...numPages - 1, id: \.self) { item in
                         Button(action: {
                             if self.selectedItems.contains(item) {
@@ -42,7 +42,7 @@ struct MultiSelectPickerView: View {
                     }
                 }
                 Section(header: Text("Folders")) {
-                    Text("即将到来").foregroundColor(.secondary)
+                    Text("Coming Soon").foregroundColor(.secondary)
                 }
             }
         }
