@@ -33,23 +33,23 @@ struct ContentView: View {
                             Text(selectedItems.isEmpty ? "None" : selectedItems.map { String($0 + 1) }.joined(separator: ", ")).foregroundColor(.secondary)
                         }
                     })
-                    Picker("排序", selection: $sortOp) {
+                    Picker("Ordering", selection: $sortOp) {
                         Text("A-Z").tag(IconStateManager.SortOption.alphabetically)
                         Text("Z-A").tag(IconStateManager.SortOption.alphabeticallyReversed)
                         Text("颜色").tag(IconStateManager.SortOption.color)
                     }.onChange(of: sortOp, perform: {nv in if nv == .color && folderOp == .alongside { folderOp = .separately }})
-                    Picker("页面", selection: $pageOp) {
+                    Picker("Pages", selection: $pageOp) {
                         Text("独立排序页面").tag(IconStateManager.PageSortingOption.individually)
                         Text("跨页面排序应用程序").tag(IconStateManager.PageSortingOption.acrossPages)
                     }
-                    Picker("文件夹", selection: $folderOp) {
+                    Picker("Folders", selection: $folderOp) {
                         Text("保留当前顺序").tag(IconStateManager.FolderSortingOption.noSort)
                         if (sortOp == .alphabetically || sortOp == .alphabeticallyReversed) {
                             Text("混合排序应用").tag(IconStateManager.FolderSortingOption.alongside)
                         }
                         Text("分开排序应用").tag(IconStateManager.FolderSortingOption.separately)
                     }
-                    Picker("小部件", selection: $widgetOp) {
+                    Picker("Widgets", selection: $widgetOp) {
                         Text("移到顶部").tag(IconStateManager.WidgetOptions.top)
                     }
                     Button("应用排序") {
